@@ -13,27 +13,23 @@
 set -e;
 
 targetfile=$1
-shortname=$(basename $1 .cpp)
+shortname=$(basename $1 .go)
 newname=$2
 
 compile() {
     echo "Compiling $targetfile..."
-    clang++ -Wall -pipe -O2 -std=c++2a \
-    -Wall -Wextra -pedantic -Wshadow -Wformat=2 -Wfloat-equal -Wconversion \
-    -Wshift-overflow -Wcast-qual -Wcast-align \
-    -Wno-unused-result -Wno-sign-conversion \
-    $targetfile -o $shortname.ex
+    go build -o $shortname.ex
     echo "Executable \"$shortname.ex\" built without errors"
 }
 
 copy() {
-    cp templates/template.cpp $newname.cpp
-    echo "New file \"$newname.cpp\" created from template"
+    cp templates/template.go $newname.go
+    echo "New file \"$newname.go\" created from template"
 }
 
 cleanup() {
-    rm *.cpp && rm *.ex
-    echo "All *.cpp and *.ex files are removed from the workspace"
+    rm *.go && rm *.ex
+    echo "All *.go and *.ex files are removed from the workspace"
 }
 
 case $1 in
