@@ -3,6 +3,7 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"log"
 	"os"
 )
 
@@ -25,8 +26,27 @@ func printf(f string, a ...interface{}) { fmt.Fprintf(writer, f, a...) }
 func scanf(f string, a ...interface{})  { fmt.Fscanf(reader, f, a...) }
 
 func main() {
+	// file
+	// ----
+	f, err := os.Open("a.in")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer f.Close()
+
+	s := bufio.NewScanner(f)
+	for s.Scan() {
+		// NOTE here
+	}
+	if err := s.Err(); err != nil {
+		log.Fatal(err)
+	}
+
+	// stdio
+	// -----
 	defer writer.Flush()
 
+	// NOTE here
 	var a, b int
 	scanf("%d %d\n", &a, &b)
 	printf("%d\n", a+b)
