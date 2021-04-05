@@ -1,4 +1,3 @@
-// Author: @damienstanton
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -11,8 +10,51 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include <bits/stdc++.h>
-using namespace std;
+#include <fstream>
+#include <iostream>
+#include <memory>
+#include <optional>
+#include <sstream>
+#include <vector>
+
+// alt definitions for common use cases
+#define loop while (true)
+#define let auto
+#define self (*this)
+#define skip std::cin.ignore()
+
+// easier constructors for auto-scoped smart pointers
+// ref is a little like Rust `&T`
+template <typename T, typename... Args>
+std::unique_ptr<T> ref(Args&&... args) {
+    return std::unique_ptr<T>(new T(std::forward<Args>(args)...));
+}
+
+// refcell is a little like Rust `RefCell<T>`
+template <typename T, typename... Args>
+std::unique_ptr<T> refcell(Args&&... args) {
+    return std::shared_ptr<T>(new T(std::forward<Args>(args)...));
+}
+
+// sort
+template <typename T>
+void sort(T v) {
+    std::sort(v.begin(), v.end());
+}
+
+// reverse
+template <typename T>
+void reverse(T v) {
+    std::reverse(v.begin(), v.end());
+}
+
+// return a slice of a given vector
+template <typename T>
+std::vector<T> slice(std::vector<T> const& v, int from, int to) {
+    auto start = v.cbegin() + from;
+    auto end = v.cbegin() + to + 1;
+    return std::vector<T>(start, end);
+}
 
 // explicit newline
 const char ln = '\n';
@@ -35,22 +77,11 @@ void println(T t) {
 }
 
 // convert a string to vector<char>
-std::vector<char> str_to_vec(std::string s) {
+std::vector<char> to_char_array(std::string s) {
 	int n = s.length();
 	std::vector<char> c(n);
 	std::copy(s.begin(), s.end(), c.begin());
 	return c;
-}
-
-// read values of `T` from stdin into a `vector<T>`
-template <typename T>
-std::vector<T> cin_to_vec(int n) {
-    std::vector<T> res(n);
-    if (n < 1)
-        return std::vector<T>();
-    for (auto& v : res)
-        std::cin >> v;
-    return res;
 }
 
 // a generic exception for simple assertions
@@ -76,6 +107,16 @@ struct AssertionError : std::exception {
         : message{message}, want{want}, got{got} {}
 };
 
+// read values of `T` from stdin into a `vector<T>`
+template <typename T>
+std::vector<T> cin_to_vec(int n) {
+    std::vector<T> res(n);
+    if (n < 1)
+        return std::vector<T>();
+    for (auto& v : res)
+        std::cin >> v;
+    return res;
+}
 
 // assert that a given `want<T>` and `got<T>` are equal, otherwise print the
 // failure message
@@ -105,6 +146,5 @@ void writebuf(std::string path, std::stringstream& buf) {
 }
 
 int main() {
-    // TODO: START HERE
     println("OK");
 }
