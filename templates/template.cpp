@@ -78,7 +78,7 @@ void println(T t) {
 
 // convert a string to vector<char>
 std::vector<char> to_char_array(std::string s) {
-	int n = s.length();
+	auto n = s.length();
 	std::vector<char> c(n);
 	std::copy(s.begin(), s.end(), c.begin());
 	return c;
