@@ -1,4 +1,4 @@
-# pset-build
+# cxx
 
 This is a small script and C++ build template suitable for small programming
 challenges or proofs of concept.
