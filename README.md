@@ -7,6 +7,7 @@ Requirements:
 - `llvm`
 - `coc-clangd`
 - `bear`
+- `gnu make`
 
 ## Usage
 
