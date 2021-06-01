@@ -3,6 +3,11 @@
 This is a small script and C++ build template suitable for small programming
 challenges or proofs of concept.
 
+Requirements:
+- `llvm`
+- `coc-clangd`
+- `bear`
+
 ## Usage
 
 - To create a new file from the template:
