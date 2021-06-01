@@ -1,3 +1,0 @@
-#!/usr/bin/env zsh
-alias build="./bin/build"
-echo "Setup is complete"
